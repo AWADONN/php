@@ -41,8 +41,10 @@ if(!empty($_GET['action'])){
 			<article>
 				<?php if ($action == 'create') : ?>
 					<h3>nowa notatka</h3>
+					<?php echo htmlentities($action) ?>
 				<?php else:?>
 					<h3> lista notatek</h3>
+					<?php echo htmlentities($action) ?>
 				<?php endif; ?>
 			</article>
 		</main>
