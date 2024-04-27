@@ -1,11 +1,10 @@
 <?php
-	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-		$uri = 'https://';
-	} else {
-		$uri = 'http://';
-	}
-	$uri .= $_SERVER['HTTP_HOST'];
-	header('Location: '.$uri.'/dashboard/');
-	exit;
-?>
-Something is wrong with the XAMPP installation :-(
+echo "hello"
+declare(strict_types=1);
+
+namespace App;
+
+include_once('./src/utils/debug.php');
+
+dump('test');
+dump('====dump====');
