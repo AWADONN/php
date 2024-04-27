@@ -1,5 +1,4 @@
 <?php
-echo "hello"
 declare(strict_types=1);
 
 namespace App;
@@ -41,7 +40,7 @@ $action=$_GET['action'] ?? null;
 					<?php echo htmlentities($action) ?>
 				<?php else:?>
 					<h3> lista notatek</h3>
-					<?php echo htmlentities($action) ?>
+					<?php echo htmlentities($action ?? '') ?>
 				<?php endif; ?>
 			</article>
 		</main>
