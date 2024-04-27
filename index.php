@@ -6,5 +6,46 @@ namespace App;
 
 include_once('./src/utils/debug.php');
 
-dump('test');
-dump('====dump====');
+//$_GET
+//$_POST
+
+if(!empty($_GET['action'])){
+	$action = $_GET['action'];
+}else{
+		$action = null;
+
+}
+?>
+<!DOCTYPE html>
+<html lang="em">
+	<head>
+	 <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	</head>
+	<body>
+		<header>
+			<h1> moje notatki</h1>
+		</header>
+		<main>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">Lista notatek</a>
+					</li>
+					<li>
+						<a href="/?action=create">nowa notatka</a>
+					</li>
+				</ul>
+			</nav>
+			<article>
+				<?php if ($action == 'create') : ?>
+					<h3>nowa notatka</h3>
+				<?php else:?>
+					<h3> lista notatek</h3>
+				<?php endif; ?>
+			</article>
+		</main>
+		<footer>Stopka</footer>
+	</body>
+</html>
