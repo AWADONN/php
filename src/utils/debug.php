@@ -15,5 +15,5 @@ function dump($params)
     ');
     //<div><pre>
     print_r($params);
-    echo('</pre></div><br>')
+    echo('</pre></div><br>');
 }
