@@ -38,10 +38,9 @@ class controller
                         'title'=>$data['title'],
                         'description'=>$data['description'],
                     ]; 
-                    $this->database->createNote($noteDat);
-                    header('location;/?before=created'); 
+                    $this->database->createNote($noteData);
+                    header('Location: /?before=created'); 
                 }
-                $viewParams['created']=$created;
                 break;
             default:
                 $page = 'list';

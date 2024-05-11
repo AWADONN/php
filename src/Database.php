@@ -18,7 +18,7 @@ class Database
     {
         try{
             $this->validateConfig($config);
-            $this->createCoonection($config);
+            $this->createConnection($config);
         } catch (PDOException $e) {
             throw new storageException("problem z płączeniem do bazy!");
         }
@@ -30,7 +30,7 @@ class Database
         $title = $this->conn->quote($data['title']);
         $description = $this->conn->quote($data['description']);
         $created = date('Y-m-d H:i:s');
-        $query = "INSERT INTO notes(title,description,created)VALUES($title,$description,'$ceated')";//APOSTROF
+        $query = "INSERT INTO notes(title,description,created)VALUES($title,$description,'$created')";//APOSTROF
         $result =$this->conn->exec($query);
       }  catch (throwable $e) {
         throw new StorageException('nie udało się utworzyć nowej notatki',400,$e);
@@ -41,12 +41,12 @@ class Database
     {
         try{
             $notes=[];
-            $query = 'SELCT id, title, created FROM notes';
+            $query = 'SELECT id, title, created FROM notes';
 
             $result =$this->conn->query($query);
             return $result->fetchAll(PDO::FETCH_ASSOC);
         }catch (Throwable $e){
-            throw new StorageException('Nie można pobrać notatek.');
+            throw new StorageException('Nie można pobrać notatek.', 400, $e);
         }
     }
     private function createConnection(array $config):void 
