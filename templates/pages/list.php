@@ -8,7 +8,7 @@
                     echo"Notatka została utworzona!";
                     break;
                 default:
-                    echo "Błędy adres url!";\
+                    echo "Błędy adres url!";
                     break;
             } 
         }

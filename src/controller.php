@@ -29,27 +29,30 @@ class controller
     }
     public function run():void
     {
-        $viewParams =[];
         switch ($this->action()){
             case 'create':
                 $page='create';
-                $created = false;
                 $data=$this->getRequestPost();
                 if (!empty($data)){
-                    $viewParams =[
+                    $noteData =[
                         'title'=>$data['title'],
                         'description'=>$data['description'],
                     ]; 
-                    $created = true; 
+                    $this->database->createNote($noteDat);
+                    header('location;/?before=created'); 
                 }
                 $viewParams['created']=$created;
                 break;
             default:
                 $page = 'list';
-                $viewParams['resutlist']='wyświetlamy listę notatek';
+                $data=$this->getRequestGet();
+                 $viewParams =[
+                    'notes'=>$this->database->getNotes(),
+                    'before'=>$data['before']??null,
+                 ];
         }
 
-        $this->view->render($page,$viewParams);
+        $this->view->render($page,$viewParams??[]);
     }
 
     private function action(): string
