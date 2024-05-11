@@ -1,5 +1,6 @@
 <div>
-    <div>
+    <section>
+    <div class="message">
         <?php
         if (!empty($prams['before'])){
             switch($params['before']){
@@ -13,8 +14,31 @@
         }
         ?>
     </div>
-    <b><?php echo $params['resultlist']??""?></b>
-
-    <h3>lista notatek</h3>
-    
+    <div class="tbl-header">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tytuł</th>
+                    <th>Data</th>
+                    <th>Opcje</th>
+                </tr>
+            </thead> 
+        </table> 
+    </div>
+    <div class="tbl-content">
+        <table>
+            <tbody>
+            <?php foreach($params['notes'] as $note) :?>
+                <tr>
+                    <td><?php echo $note['id']?></td>
+                    <td><?php echo $note['title']?></td>
+                    <td><?php echo $note['created']?></td>
+                    <td>szczegóły</td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>   
+        </table>
+    </div>
+    </section>
 </div>
