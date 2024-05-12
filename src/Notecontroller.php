@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App;
+
+include_once('./src/View.php');
+require_once('./config/config.php');
+require_once('./src/Database.php');
+require_once('./src/abstractController.php');
+
+use App\request;
+use App\Exception\NotFoundException;
+
+class Notecontroller extends AbstractController
+{
+    public function createAction()
+    {
+        if ($this->request->haspost()){
+            $noteData =[
+                'title' => $this->request->postParam('title'),
+                'description' => $this->request->postParam('description')
+            ];
+            $this->database->createNote($noteData);
+            header('location:/?before=created');
+            exit;
+        }
+        $this -> view->render('create');
+    }
+    public function showAction()
+    {
+        $noteId = (int) $this->request->getParam('id');
+        if (!$noteId) {
+            header('Location: /?error=missingNoteId');
+            exit;
+        }
+        try{
+            $note = $this->database->getNote($noteId);            
+        } catch (NotFoundException $e){
+            header('location:/?error=NotFoundException');
+            exit;
+        }
+        $this->view->render('show',['note'=> $note]); 
+    }
+    public function listAction()
+    {
+        $this -> view -> render('list', [
+            'notes' => $this -> database -> getNotes(),
+            'before' => $this -> request -> getParam('before'),
+            'error' => $this -> request -> getParam('error'),
+        ]);
+    }
+}
