@@ -5,6 +5,7 @@ declare (strict_types=1);
 namespace App;
 
 use App\Exception\ConfiguratonException;
+use App\Exception\NotFoundException;
 use App\Exception\StorageException;
 use Exception;
 use PDO;
@@ -48,6 +49,22 @@ class Database
         }catch (Throwable $e){
             throw new StorageException('Nie można pobrać notatek.', 400, $e);
         }
+    }
+
+    public function getNote(int $id):array
+    {
+        try {
+            $query = "SELECT * FROM notes WHERE id=$id";
+            $result = $this -> conn -> query($query);
+            $note = $result -> fetch(PDO::FETCH_ASSOC);
+        } catch (Throwable $e) {
+            throw new StorageException('nie udało się pobrać notatki',400,$e);
+        }
+        if (!$note){
+            throw new NotFoundException('Notatka o id: $id nie istnieje.');
+        }
+        
+        return $note;
     }
     private function createConnection(array $config):void 
     {
