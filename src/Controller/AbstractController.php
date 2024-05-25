@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App;
-
-
-require_once('./config/config.php');
-require_once('./src/Database.php');
+namespace App\Controller;
 
 use App\Request;
+use App\Database;
+use App\View;
 use App\Exception\NotFondException;
 
 class AbstractController
@@ -38,7 +36,20 @@ class AbstractController
         }
         $this->$action();
     }
-
+    protected function redirect(string $to, array $params): void
+    {
+        $location=$to;
+        if (count($params)){
+            $queryParams=[];
+            foreach ($params as $key => $value ){
+                $queryParams[]= urlencode($key).'='.urlencode($value);
+            }
+            $queryParams = implode('&',$queryParams);
+            $location .= '?' . $queryParams;
+        }
+        header("location: $location");
+        exit;
+    }
     private function action(): string 
     {
         return $this->request->getParam('action',self::DEFAULT_ACTION);

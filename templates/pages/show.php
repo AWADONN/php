@@ -13,6 +13,9 @@
             <li>
                 <button><a href="/">powrót do listy notatek </a></buton>
             </li>
+            <li>
+            <button><a href="action=edit >">edytuj </a></buton>
+            </li>
         </ul>
     <?php else :?>
         <div>brak notatki do wyświetlenia </div>

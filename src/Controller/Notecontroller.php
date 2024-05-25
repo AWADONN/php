@@ -2,17 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Controller;
 
-include_once('./src/View.php');
-require_once('./config/config.php');
-require_once('./src/Database.php');
-require_once('./src/abstractController.php');
 
-use App\request;
 use App\Exception\NotFoundException;
 
-class Notecontroller extends AbstractController
+class NoteController extends AbstractController
 {
     public function createAction()
     {
@@ -22,8 +17,7 @@ class Notecontroller extends AbstractController
                 'description' => $this->request->postParam('description')
             ];
             $this->database->createNote($noteData);
-            header('location:/?before=created');
-            exit;
+            $this->redirect('/',['before'=>'created']);
         }
         $this -> view->render('create');
     }
@@ -31,14 +25,12 @@ class Notecontroller extends AbstractController
     {
         $noteId = (int) $this->request->getParam('id');
         if (!$noteId) {
-            header('Location: /?error=missingNoteId');
-            exit;
+            $this->redirect('/',['error'=>'missingNoteId']);
         }
         try{
             $note = $this->database->getNote($noteId);            
         } catch (NotFoundException $e){
-            header('location:/?error=NotFoundException');
-            exit;
+            $this->redirect('/',['error'=>'noteNotFound']);
         }
         $this->view->render('show',['note'=> $note]); 
     }
@@ -50,4 +42,6 @@ class Notecontroller extends AbstractController
             'error' => $this -> request -> getParam('error'),
         ]);
     }
+
+    //Metoda editAction odpowiedziala za render edit.php i sprawdająca czy id istnieje, jest poprawne itp.
 }

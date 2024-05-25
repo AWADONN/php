@@ -77,6 +77,7 @@ class Database
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]
        ); 
+       //$this->conn=PDO('lalalalala');
     }
 
     private function ValidateConfig(array $config): void 
