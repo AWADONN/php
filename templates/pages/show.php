@@ -14,7 +14,7 @@
                 <button><a href="/">powrót do listy notatek </a></buton>
             </li>
             <li>
-            <button><a href="action=edit >">edytuj </a></buton>
+            <button><a href="/?action=edit&id=<?php echo (int) $note['id']?>">edytuj </a></buton>
             </li>
         </ul>
     <?php else :?>

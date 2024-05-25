@@ -43,5 +43,12 @@ class NoteController extends AbstractController
         ]);
     }
 
-    //Metoda editAction odpowiedziala za render edit.php i sprawdająca czy id istnieje, jest poprawne itp.
+    public function editAction()
+    {
+        $noteId=(int)$this->request->getParam('id');
+        if (!$noteId){
+            $this->redirect('/',['error'=>'missingNoteId']);
+        }
+        $this->view->render('edit');
+    }
 }
