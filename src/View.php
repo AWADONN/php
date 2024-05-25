@@ -9,19 +9,19 @@ class View
         $params = $this->escape($params);
         require_once('./templates/layout.php');
     }
-}
-private function escape(array $params);
-{
-    $clearParams = [];
-
-    foreach ($params as $key => $param) {
-        if(is_array($param)){
-            $clearParams[$key]=$this->escape($param);    
-        }else if ($param){
-            $clearParams[$key]=htmlentities($param); 
-        }else{
-            $clearParams[$key]=$param;
+    private function escape(array $params)
+    {
+        $clearParams = [];
+    
+        foreach ($params as $key => $param) {
+            if(is_array($param)){
+                $clearParams[$key]=$this->escape($param);    
+            }else if ($param){
+                $clearParams[$key]=htmlentities($param); 
+            }else{
+                $clearParams[$key]=$param;
+            }
         }
+        return $clearParams;
     }
-    return $clearParams;
 }
