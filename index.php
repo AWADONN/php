@@ -18,9 +18,12 @@ use App\Controller\NoteController;
 use App\Controller\AbstractController;
 use App\Request;
 
+
+
+
 try{
 	AbstractController::initConfiguration($configuration);
-	$request = new Request($_GET, $_POST);
+	$request = new Request($_GET, $_POST,$_SERVER);
 	$controller=new NoteController($request);
 	$controller->run();
 } catch (AppException $e) {
