@@ -1,3 +1,4 @@
+
 <div>
     <section>
         <div class="message">
@@ -20,6 +21,9 @@
                 switch($params['before']){
                     case'created':
                         echo"Notatka została utworzona!";
+                        break;
+                    case'edited':
+                        echo"Notatka została zaktulizowana!";
                         break;
                     default:
                         echo "Błędy adres url!";
