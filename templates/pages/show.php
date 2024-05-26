@@ -16,6 +16,9 @@
             <li>
             <button><a href="/?action=edit&id=<?php echo (int) $note['id']?>">edytuj </a></buton>
             </li>
+            <li>
+            <button><a href="/?action=delete&id=<?php echo unlink(int) unlink($note['id'])?>">usuń </a></buton>
+            </li>
         </ul>
     <?php else :?>
         <div>brak notatki do wyświetlenia </div>
