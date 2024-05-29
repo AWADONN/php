@@ -42,8 +42,8 @@ class NoteController extends AbstractController
             'error' => $this -> request -> getParam('error'),
         ]);
     }
-
     public function editAction()
+
     {
         if($this->request->isPost()){
             $noteId=(int)$this->request->postParam('id');
@@ -64,5 +64,29 @@ class NoteController extends AbstractController
             $this->redirect('/',['error'=>'noteNotFound']);
         }
         $this->view->render('edit',[ 'note' => $note ]);
+    }
+    public function deleteAction()
+    {
+        if($this->request->isPost()){
+            $noteId=(int)$this->request->postParam('id');
+
+            $this->database->deleteNote($noteId);
+            $this->redirect('delete',['note'=>'deleted']);
+        }
+        $this->view->render('delete',['note'=>$this->getNote()]);
+    }
+
+    public function getNote(): array
+    {
+        $noteId=(int)$this->request->getParam('id');
+        if(!$noteId){
+            $this->redirect('/',['error'=>'missingNoteId']);
+        }
+        try{
+            $note=$this->database->getNote($noteId);
+        } catch (NotFoundException $e){
+            $this->redirect('/',['error'=>'noteNotFound']);
+        }
+        return $note;
     }
 }
