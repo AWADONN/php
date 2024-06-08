@@ -12,10 +12,10 @@
                 </a>
             </li>
             <li>
-                <from action="/?action=delete&i=<?php echo (int) $note['id']?>"method="post">
+                <form action="/?action=delete&id=<?php echo (int) $note['id']?>" method="post">
                     <input type ="text" name="id" value="<?php echo (int) $note['id']?>"hidden>
                     <input type="submit" value="Usuń">
-                </from>
+                </form>
 
             </li>
         </ul>
